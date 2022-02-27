@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('licenses', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignIdFor(Team::class);
+            $table->uuid()->index();
+            $table->foreignIdFor(Team::class)->index();
             $table->timestamps();
         });
     }
