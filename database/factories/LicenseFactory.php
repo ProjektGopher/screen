@@ -19,8 +19,50 @@ class LicenseFactory extends Factory
     public function definition()
     {
         return [
-            'team_id' => Team::random(),
+            //
         ];
+    }
+
+    /**
+     * Indicate that the license should belong to a randomly chosen existing team.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function withTeam(Team $team)
+    {
+        return $this->state(function (array $attributes) use ($team) {
+            return [
+                'team_id' => $team,
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the license should belong to a randomly chosen existing team.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function withRandomTeam()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'team_id' => Team::random(),
+            ];
+        });
+    }
+
+    /**
+     * Indicate that the license should belong to a new team.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function withNewTeam()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'team_id' => Team::factory(),
+            ];
+        });
     }
 
     /**

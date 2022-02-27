@@ -14,7 +14,7 @@ class License extends Model
     use HasFactory;
     use GeneratesUuid;
 
-    protected $attributes = [
+    protected $casts = [
         'type' => LicenseTypes::class,
     ];
 
@@ -25,6 +25,6 @@ class License extends Model
 
     public function transferTo(Team $team): void
     {
-        throw new NotImplementedException;
+        $this->team()->associate($team)->save();
     }
 }

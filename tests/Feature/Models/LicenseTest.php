@@ -1,7 +1,16 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+use App\Models\License;
+use App\Models\Team;
 
-    $response->assertStatus(200);
+test('a license can be transfered to another team', function () {
+    $teams = Team::factory()->times(2)->create();
+    $license = License::factory()->withTeam($teams[0])->create();
+
+    // check relationship for sanity
+    $this->assertTrue($license->team->is($teams[0]));
+
+    $license->transferTo($teams[1]);
+
+    $this->assertTrue($license->fresh()->team->is($teams[1]));
 });
