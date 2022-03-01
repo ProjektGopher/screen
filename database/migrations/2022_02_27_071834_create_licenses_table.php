@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->uuid()->index();
             $table->foreignIdFor(Team::class)->index();
+            $table->string('type');
             $table->timestamps();
         });
     }
