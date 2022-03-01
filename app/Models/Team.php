@@ -8,6 +8,7 @@ use Laravel\Jetstream\Events\TeamUpdated;
 use Laravel\Jetstream\Team as JetstreamTeam;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Team extends JetstreamTeam
 {
@@ -46,5 +47,10 @@ class Team extends JetstreamTeam
     public function licenses(): HasMany
     {
         return $this->hasMany(License::class);
+    }
+
+    public function screens(): HasManyThrough
+    {
+        return $this->hasManyThrough(Screen::class, License::class);
     }
 }

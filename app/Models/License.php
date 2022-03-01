@@ -8,6 +8,7 @@ use App\Exceptions\NotImplementedException;
 use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class License extends Model
 {
@@ -21,6 +22,11 @@ class License extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function screen(): HasOne
+    {
+        return $this->hasOne(Screen::class);
     }
 
     public function transferTo(Team $team): void
